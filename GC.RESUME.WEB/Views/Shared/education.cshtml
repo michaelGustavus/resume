@@ -1,0 +1,18 @@
+﻿@using GC.RESUME.WEB.Models
+@model Education
+
+@if (Model.ContainsData == true)
+{
+    <section class="resume-section" id="education">
+        <div class="resume-section-content">
+            <h2 class="mb-5">Education</h2>
+            @foreach (Education.education education in Model.Educations)
+            {
+                <p class="lead mb-5">Received a @education.DegreeTitle of @education.DegreePath from @education.SchoolName with a @education.GPA GPA</p>
+                <p class="lead mb-5">@education.fromDt - @education.toDt</p>
+            }
+        </div>
+    </section>
+
+    <hr class="m-0" />
+}

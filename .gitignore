@@ -1,0 +1,23 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/GC.RESUME.WEB/GC.RESUME.WEB.csproj
+/.vs
+/GC.RESUME.API/bin/Debug/net7.0
+/GC.RESUME.API/obj
+/GC.RESUME.CORE/bin/Debug/netcoreapp3.1
+/GC.RESUME.CORE/obj
+*.vspscc
+/GC.RESUME.DATABASE/obj/Debug
+*.user
+*.sqlproj
+*.jfm
+/GC.RESUME.WEB/bin/Debug/net7.0
+/GC.RESUME.WEB/obj/Debug/net7.0/ref
+/GC.RESUME.WEB/obj/Debug/net7.0/refint
+/GC.RESUME.WEB/obj/Debug/net7.0/staticwebassets
+/GC.RESUME.WEB/obj/Debug/net7.0
+/GC.RESUME.WEB/obj/Release/net7.0
+/GC.RESUME.WEB/obj
+/GC.RESUME.WEB/GC.RESUME.WEB.csproj.vspscc

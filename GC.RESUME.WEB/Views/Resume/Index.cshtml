@@ -1,0 +1,225 @@
+﻿@model Resume
+
+@{
+    ViewData["Title"] = "Home Page";
+    this.Layout = "Resume_Layout.cshtml";
+}
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    @*   @foreach (Resume.User user in Model.users)
+    {
+    <h2>@user.userName</h2>
+    }*@
+    <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        @foreach (Profiles.profile profile in Model.profiles.profiles)
+        {
+
+            <span class="d-none d-lg-block"><img class="img-fluid img-profile mx-auto mb-2" src="@profile.picURL" alt="..." /></span>
+            <span class="d-block d-lg-none">@profile.firstName @profile.midName @profile.lastName</span>
+        }
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav">
+            @if (Model.profiles.ContainsData == true)
+            {
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">@Model.profiles.Title</a></li>
+            }
+            @if (Model.profiles.ContainsData == true)
+            {
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">@Model.profiles.ObjectiveTitle</a></li>
+            }
+            @if (Model.Experiences.ContainsData == true)
+            {
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">@Model.Experiences.Title</a></li>
+            }
+            @if (Model.educations.ContainsData == true)
+            {
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">@Model.educations.Title</a></li>
+            }
+            @if (Model.languages.ContainsData == true)
+            {
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">@Model.languages.Title</a></li>
+            }
+
+            @if (Model.awards.ContainsData == true && Model.certifications.ContainsData == true)
+            {
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">@Model.awards.Title & @Model.certifications.Title</a></li>
+            }
+            else if (Model.awards.ContainsData == true || Model.certifications.ContainsData == true)
+            {
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">@Model.awards.Title  @Model.certifications.Title</a></li>
+            }
+        </ul>
+    </div>
+</nav>
+<!-- Page Content-->
+
+
+               
+
+    <!-- About-->
+    <section class="resume-section" id="about">
+        <div class="resume-section-content">
+            @if (Model.profiles.ContainsData == true)
+            {
+                @foreach (Profiles.profile profile in Model.profiles.profiles)
+                {
+                    <div class="subheading mb-lg-auto"> @profile.firstName @profile.midName @profile.lastName </div>
+                    <div class="subheading mb-5">
+                        @profile.address @profile.address2 · @profile.city, @profile.state @profile.zip ·@if (Model.phones.ContainsData == true)
+                        {
+                            @foreach (Phone.phone phone in Model.phones.phones)
+                            {
+                                @phone.phone1
+                            }
+                        }
+                        @if (Model.emails.ContainsData = true)
+                        {
+                            @foreach (Email.email email in Model.emails.Emails)
+                            {
+                                <a href="mailto:@email.email1">@email.email1</a>
+                            }
+                        }
+                    </div>
+                }
+
+
+                @foreach (Profiles.profile profile in Model.profiles.profiles)
+                {
+                    <p class="lead mb-5">@profile.about</p>
+                }
+            }
+            <div class="social-icons">
+                @if (Model.links.ContainsData == true)
+                {
+                    @foreach (Links.link links in Model.links.links)
+                    {
+                        <a class="social-icon" href=@links.LinkedInURL><i class="fab fa-linkedin-in"></i></a>
+                        <a class="social-icon" href=@links.GithubURL><i class="fab fa-github"></i></a>
+                        <a class="social-icon" href=@links.TwitterURL><i class="fab fa-twitter"></i></a>
+                        <a class="social-icon" href=@links.FacebookURL><i class="fab fa-facebook-f"></i></a>
+                    }
+                }
+            </div>
+        </div>
+    </section>
+    <hr class="m-0" />
+    <!-- Objective-->
+    <section class="resume-section" id="interests">
+        <div class="resume-section-content">
+            <h2 class="mb-5">@Model.profiles.ObjectiveTitle</h2>
+            @foreach (Profiles.profile profile in Model.profiles.profiles)
+            {
+                <p class="lead mb-5">@profile.interests</p>
+            }
+        </div>
+    </section>
+    <hr class="m-0" />
+    <!-- Awards-->
+    <!-- Experience-->
+    @if (Model.Experiences.ContainsData == true)
+    {
+        <section class="resume-section" id="experience">
+            <div class="resume-section-content">
+                <h2 class="mb-5">Experience</h2>
+                @foreach (Experience.experience experience in Model.Experiences.experiences)
+                {
+                    <p class="lead mb-5">@experience.title for @experience.employer</p>
+                    <p class="lead mb-5">@experience.fromDt - @experience.toDt</p>
+                    <p class="lead mb-5">@experience.description</p>
+                }
+            </div>
+        </section>
+        <hr class="m-0" />
+    }
+    <!-- Education-->
+    @Html.Partial("education", Model.educations)
+    @*@if (Model.educations.ContainsData == true)
+    {
+        <section class="resume-section" id="education">
+            <div class="resume-section-content">
+                <h2 class="mb-5">Education</h2>
+                @foreach (Education.education education in Model.educations.Educations)
+                {
+                    <p class="lead mb-5">Received a @education.DegreeTitle of @education.DegreePath from @education.SchoolName with a @education.GPA GPA</p>
+                    <p class="lead mb-5">@education.fromDt - @education.toDt</p>
+                }
+            </div>
+        </section>
+
+        <hr class="m-0" />
+    }*@
+    <!-- Skills-->
+    @if (Model.languages.ContainsData == true)
+    {
+        <section class="resume-section" id="skills">
+            <div class="resume-section-content">
+                <h2 class="mb-5">@Model.languages.Title</h2>
+                @foreach (Languages.language language in Model.languages.Language)
+                {
+                    <p class="lead mb-5">I have learned @language.langName</p>
+                }
+            </div>
+        </section>
+        <hr class="m-0" />
+    }
+    @{
+        //Html.Partial("Awards/index", Model.awards);
+    }
+    @if (Model.awards.ContainsData == true || Model.certifications.ContainsData == true)
+    {
+        <section class="resume-section" id="awards">
+            
+            <div class="resume-section-content">
+                @if (Model.awards.ContainsData == true && Model.certifications.ContainsData == true)
+                {
+                    <h2 class="mb-5">@Model.awards.Title & @Model.certifications.Title</h2>
+                }
+                else
+                {
+                    <h2 class="mb-5">@Model.awards.Title @Model.certifications.Title</h2>
+                }
+                @if (Model.awards.ContainsData == true)
+                {
+                    @foreach (Award.award award in Model.awards.Awards)
+                    {
+                        <table>
+                            <thead>
+                            <td>Place,</td>
+                            <td>Location,</td>
+                            <td>Company Name,</td>
+                            <td>Year Recieved</td>
+                            </thead>
+                            <tr>
+                                <td>@award.Place</td>
+                                <td>@award.Location</td>
+                                <td>@award.CompName</td>
+                                <td>@award.YearRec</td>
+                            </tr>
+                        </table>
+                    }
+                }
+                @if (Model.certifications.ContainsData == true)
+                {
+                    @foreach (Certification.certification certifications in Model.certifications.certifications)
+                    {
+                        @if (Model.certifications.certifications.Count > 0)
+                        {
+                            <table>
+                                <thead>
+                                <td>Certification Title,</td>
+                                <td>Received From</td>
+                                </thead>
+                                <tr>
+                                    <td>@certifications.certTitle</td>
+                                    <td>@certifications.recievedFrom</td>
+                                </tr>
+                            </table>
+                        }
+                    }
+                }
+            </div>
+        </section>
+    }
+</div>
